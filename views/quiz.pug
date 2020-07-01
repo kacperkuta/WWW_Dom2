@@ -1,0 +1,50 @@
+doctype html
+head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    title Quizzy!
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    link(rel='stylesheet' type='text/css' media='screen' href='style.css')
+    style
+        include ../style.css
+.grid
+    p#dummy #{quiz}
+    h1#header Quizzy!
+    #startButton
+        button#start Rozpocznij QUIZ
+    #quiz
+        #timer
+            p#timer_par 0.0
+        h2 Wstęp
+        p#entry
+        h2#task_header Zadanie
+        p#task
+        h2 Twoja odpowiedź:
+        input#anwser
+        br
+        #quizButtons
+            button#previous.non_start Poprzednie
+            button#end.non_start Stop
+            button#next.non_start Następne
+        #cancelButton
+            button#cancel.non_start Anuluj quiz
+    #results
+        h4 Twój wynik to:
+        p#results_par.report
+        h4 Kary za zadania:
+        p#mistakes.report
+        h4 Suma kar:
+        p#penalties.report
+        #returnDiv
+            button#return.return Od nowa!
+            button#saveNoStats.return Zapisz wynik
+            button#saveWithStats.return Zapisz wynik i statystyki
+        #statsDiv
+            h4 Najlepsze wyniki:
+            p#stats
+
+    form.dummy(action="/results" method="POST")
+        input(type='text' name = 'results' id='results_field')
+        input(type="submit" value="send" id = 'send')
+script
+    include ../script.js

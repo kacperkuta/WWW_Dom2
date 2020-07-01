@@ -1,0 +1,23 @@
+html
+    head
+        title= "Log in"
+    style
+        include ../style.css
+    body
+        h1= powitanie
+        form(action= url method="POST")
+            input(type='username' name = 'us')
+            br
+            | Login
+            br
+            br
+            input(type="password" name = 'pas')
+            br
+            | Hasło
+            br
+            br
+            input(type="submit" value="Zaloguj" id = 'loginbut')
+            br
+            br
+            a(href = "/change_password") Zmień hasło
+

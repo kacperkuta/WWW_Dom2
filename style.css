@@ -1,0 +1,141 @@
+h1 {
+    text-align: center;
+    grid-area: "header";
+    padding: 40px;
+}
+
+#startButton {
+    grid-area: "button";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+
+@media (min-width: 601px) {
+    #start {
+        width: 20%;
+        height: 80px;
+    
+        padding-left: auto;
+        padding-right: auto;
+        background-color: green;
+    }
+}
+
+@media (max-width: 600px) {
+    #start {
+        width: fit-content;
+        height: 80px;
+    
+        padding-left: auto;
+        padding-right: auto;
+        background-color: green;
+    }
+}
+
+#quiz {
+    text-align: center;
+    display: none;
+}
+
+#results {
+    grid-area: "results";
+    display: none;
+    justify-content: center;
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-areas: 'header'
+    'button'
+    'results';
+    grid-template-columns: 100%;
+}
+body, html{
+    height: 100%;
+    background-color: skyblue;
+}
+
+#quizButtons {
+    display: flex;
+    justify-content: space-evenly;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 27px;
+}
+
+#cancelButton {
+    justify-content: center;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 27px;
+}
+
+#timer {
+    padding: 20px;
+}
+
+@media (min-width: 1001px) {
+    .non_start {
+        width: 25%;
+        height: 50px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .non_start {
+        width: fit-content;
+        height: 50px;
+    }
+}
+
+#end {
+    background-color: red;
+}
+
+#results_par, #report {
+    font-size: 20px;
+}
+
+@media (min-width: 1001px) {
+    .return {
+        height: 50px;
+        width: 25%;
+        background-color: darkblue;
+        color: aliceblue;
+    }
+}
+
+@media (max-width: 1000px) {
+    .return {
+        height: 50px;
+        width: fit-content;
+        background-color: darkblue;
+        color: aliceblue;
+    }
+}
+
+#returnDiv {
+    padding: 20px;
+}
+
+#statsDiv {
+    padding: 20px;
+    text-align: center;
+}
+
+#dummy {
+    display: none;
+}
+
+.dummy{
+    display: none;
+}
+
+a {
+    color: darkred;
+}
+

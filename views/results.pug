@@ -1,0 +1,23 @@
+doctype html
+head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    title Quizzy!
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    link(rel='stylesheet' type='text/css' media='screen' href='style.css')
+    style
+        include ../style.css
+.grid
+        h4 Twój wynik to:
+        p#results_par.report
+        h4 Kary za zadania:
+        p#mistakes.report
+        h4 Suma kar:
+        p#penalties.report
+        #returnDiv
+            button#saveNoStats.return Zapisz wynik
+        #statsDiv
+            h4 Najlepsze wyniki:
+            p#stats
+script
+    include ../script.js
