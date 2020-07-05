@@ -3,10 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
     "createdb": "npx ts-node createdb.ts",
     "app": "npx ts-node app.ts",
-    "test": "npx mocha -r ts-node/register test.ts"
+    "test": "npm run createdb; npx mocha -r ts-node/register test.ts"
   },
   "dependencies": {
     "@types/node": "^14.0.14",

@@ -176,7 +176,6 @@ app.get('/quiz/:id', async (req, res) => {
                 renderQuizes(req, res, db);
             } else {
                 db.get('SELECT * FROM solved WHERE login = "' + user + '" AND quiz_id = ' + req.session.myQuiz.id + ';', (err, result) => {
-                    console.log('sprawdzam');
                     if (err != null) {
                         console.log(err);
                     } else {
