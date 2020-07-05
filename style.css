@@ -42,7 +42,6 @@ h1 {
 
 #results {
     grid-area: "results";
-    display: none;
     justify-content: center;
     text-align: center;
 }
@@ -119,7 +118,7 @@ body, html{
 }
 
 #returnDiv {
-    padding: 20px;
+    padding-left: 43%;
 }
 
 #statsDiv {
@@ -137,5 +136,9 @@ body, html{
 
 a {
     color: darkred;
+}
+
+#confirm {
+    display: none;
 }
 

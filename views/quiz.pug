@@ -20,7 +20,7 @@ head
         h2#task_header Zadanie
         p#task
         h2 Twoja odpowiedź:
-        input#anwser
+        input(type = 'text' id='anwser')
         br
         #quizButtons
             button#previous.non_start Poprzednie
@@ -28,23 +28,11 @@ head
             button#next.non_start Następne
         #cancelButton
             button#cancel.non_start Anuluj quiz
-    #results
-        h4 Twój wynik to:
-        p#results_par.report
-        h4 Kary za zadania:
-        p#mistakes.report
-        h4 Suma kar:
-        p#penalties.report
-        #returnDiv
-            button#return.return Od nowa!
-            button#saveNoStats.return Zapisz wynik
-            button#saveWithStats.return Zapisz wynik i statystyki
-        #statsDiv
-            h4 Najlepsze wyniki:
-            p#stats
+            button#confirm.non_start Potwierdź podejście
 
     form.dummy(action="/results" method="POST")
-        input(type='text' name = 'results' id='results_field')
-        input(type="submit" value="send" id = 'send')
+        input(type='text' name='anwsers' id='results_field')
+        input(type='text' name='times' id='times_field')
+        input(type="submit" value="send" id='send')
 script
     include ../script.js

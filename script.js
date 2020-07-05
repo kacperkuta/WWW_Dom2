@@ -59,7 +59,6 @@ var timer = new Array(quizLength);
 var givenAnwsers = 0;
 var actTime = 0;
 var intervalFun;
-var totalResult = 0;
 var startButton = document.getElementById("startButton");
 var start = document.querySelector("button[id=start]");
 var quizDiv = document.querySelector("div[id=quiz]");
@@ -71,17 +70,12 @@ var cancelButton = document.querySelector("button[id=cancel]");
 var entryParagrapgh = document.querySelector("p[id=entry]");
 var taskParagrapgh = document.querySelector("p[id=task]");
 var resultsDiv = document.getElementById("results");
-var results = document.querySelector("p[id=results_par]");
 var returnButton = document.querySelector("button[id=return]");
-var mistakesParagraph = document.querySelector("p[id=mistakes]");
-var penaltiesParagraph = document.querySelector("p[id=penalties]");
 var timerParagraph = document.querySelector("p[id=timer_par]");
-var saveWithStats = document.querySelector("button[id=saveWithStats]");
-var saveNoStats = document.querySelector("button[id=saveNoStats]");
-var statsParagraph = document.querySelector("p[id=stats]");
 var taskHeader = document.querySelector("h2[id=task_header]");
-var resultsFiled = document.querySelector("input[id=results_field]");
 var sendButton = document.querySelector("input[id=send]");
+var confirmButton = document.querySelector("button[id=confirm]");
+
 
 
 function reset() {
@@ -167,80 +161,28 @@ cancelButton.addEventListener("click", function () {
     startButton.style.display = "flex";
     reset();
 });
-function proceedResults() {
-    var result = 0;
-    var i = 0;
-    while (i < quizLength) {
-        if (anwsers[i] != quiz.odpowiedzi[i]) {
-            result += quiz.kary[i];
-        }
-        i++;
-    }
-    return result;
-}
-function wrongAnwsers() {
-    var mistakes = "";
-    var i = 0;
-    while (i < quizLength) {
-        if (anwsers[i] != quiz.odpowiedzi[i]) {
-            mistakes += (i + 1).toString() + " ";
-        }
-        i++;
-    }
-    if (mistakes == "") {
-        mistakes = "Wszystko dobrze :)";
-    }
-    return mistakes;
-}
-function countTime() {
-    var i = 0;
-    var total = 0;
-    while (i < quizLength) {
-        total = total + timer[i].result();
-        i++;
-    }
-    return total;
-}
-function bestResults() {
-    var storLen = localStorage.length;
-    var results = new Array(storLen);
-    for (var i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i);
-        var value = JSON.parse(localStorage.getItem(key));
-        results[i] = value.total;
-    }
-    var sortedResults = results.sort(function (n1, n2) { return n1 - n2; });
-    var bestResults = "";
-    for (var i = 0; i < min(3, sortedResults.length); i++) {
-        bestResults += sortedResults[i].toString();
-        bestResults += "<br>";
-    }
-    if (bestResults === "") {
-        bestResults += "Zagraj, aby zobaczyć wyniki";
-    }
-    return bestResults;
-}
+
 stopButton.addEventListener("click", function () {
     nextPos = actPos;
     checkFields();
     if (givenAnwsers === quizLength) {
         timer[actPos].end_count();
 
-        resultsFiled.innerHTML = JSON.stringify(anwsers);
-        sendButton.click();
+        var times = [];
+        for (let i = 0; i < quizLength; i++) {
+            times[i] = timer[i].result();
+        }
 
-        var result = proceedResults();
-
-        totalResult = result + countTime();
-        resultsDiv.style.display = "inline";
-        results.innerHTML = totalResult.toString();
-        var mistakes = wrongAnwsers();
-        mistakesParagraph.innerHTML = mistakes;
-        penaltiesParagraph.innerHTML = result.toString();
-        statsParagraph.innerHTML = bestResults();
-        quizDiv.style.display = "none";
+        document.getElementById("results_field").setAttribute('value', JSON.stringify(anwsers));
+        document.getElementById("times_field").setAttribute('value', JSON.stringify(times));
+        confirmButton.style.display = 'flex';
     }
 });
+
+confirmButton.addEventListener("click", function () {
+    sendButton.click();
+});
+
 function returnAction() {
     resultsDiv.style.display = "none";
     quizDiv.style.display = "none";
@@ -250,19 +192,6 @@ function returnAction() {
 returnButton.addEventListener("click", function () {
     returnAction();
 });
-function createStats() {
-    var stats = new Result(quizLength);
-    stats.total = totalResult;
-    var i = 0;
-    while (i < quizLength) {
-        stats.stats[i] = timer[i].result();
-        i++;
-    }
-    localStorage.setItem(localStorage.length.toString(), JSON.stringify(stats));
-}
 
-saveWithStats.addEventListener("click", function () {
-    createStats();
-    returnAction();
-});
+
 

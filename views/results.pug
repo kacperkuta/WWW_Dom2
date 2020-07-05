@@ -8,16 +8,16 @@ head
     style
         include ../style.css
 .grid
+    #results
         h4 Twój wynik to:
-        p#results_par.report
+        p#results_par.report #{result}
         h4 Kary za zadania:
-        p#mistakes.report
+        p#mistakes.report #{mistakes}
         h4 Suma kar:
-        p#penalties.report
-        #returnDiv
-            button#saveNoStats.return Zapisz wynik
-        #statsDiv
-            h4 Najlepsze wyniki:
-            p#stats
-script
-    include ../script.js
+        p#penalties.report #{penalties}
+    #returnDiv
+        form(method='get' action = '/end')
+            input(type='submit' value = 'Zapisz wynik')#saveNoStats.return
+    #statsDiv
+        h4 Najlepsze wyniki:
+        p#stats #{bests}

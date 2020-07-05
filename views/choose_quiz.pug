@@ -9,7 +9,7 @@ head
         include ../style.css
 body
     .grid
-        h1 Wybierz quiz:
+        h1(id='info') #{info}
         each quiz in quizzes
             a(href = "/quiz/" + quiz.id) #{quiz.wstep}
             br
