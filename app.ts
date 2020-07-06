@@ -32,10 +32,6 @@ class Quiz {
     kary: number[];
 }
 
-//let quizzes = new Array<Quiz>();
-//let myQuiz: Quiz = null;
-let user : String = "";
-
 function proceedResults(anwsers, req) {
     let quizLength = req.session.myQuiz.wstep.length;
     let result = 0;
@@ -48,6 +44,7 @@ function proceedResults(anwsers, req) {
     }
     return result;
 }
+
 function wrongAnwsers(anwsers, req) {
     let quizLength = req.session.myQuiz.wstep.length;
     var mistakes = "";
@@ -133,7 +130,6 @@ app.get('/choose_quiz', async (req, res) => {
     }
 });
 
-
 app.get('/change_password', (req, res) => {
     res.render("change_password", {powitanie: "Zmień hasło:"});
 });
@@ -175,7 +171,7 @@ app.get('/quiz/:id', async (req, res) => {
             if (req.session.myQuiz == null) {
                 renderQuizes(req, res, db);
             } else {
-                db.get('SELECT * FROM solved WHERE login = "' + user + '" AND quiz_id = ' + req.session.myQuiz.id + ';', (err, result) => {
+                db.get('SELECT * FROM solved WHERE login = "' + req.session.user + '" AND quiz_id = ' + req.session.myQuiz.id + ';', (err, result) => {
                     if (err != null) {
                         console.log(err);
                     } else {
@@ -236,7 +232,7 @@ app.get('/end', async (req, res) => {
     if (tokenVerify == true) {
         sqlite3.verbose();
         const db = new sqlite3.Database('baza.db');
-        db.run('INSERT INTO solved (login, quiz_id) VALUES ("' + user + '",' + req.session.myQuiz.id + ');', (err) => {
+        db.run('INSERT INTO solved (login, quiz_id) VALUES ("' + req.session.user + '",' + req.session.myQuiz.id + ');', (err) => {
             if (err != null) {
                 console.log(err);
             } else {
